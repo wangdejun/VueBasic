@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VueBaic_2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script> 
+</head>
+
+
+<body>
+    <div id="example"> 
+            {{ message.split('').reverse().join(';')}}
+            {{ gender[0] }}
+            <li v-for='item in name.member'> 
+                {{item}}
+            </li>
+            <div>   
+                {{name.leader}}
+            </div>
+    </div>
+    <div id="demo">{{ fullName }}</div>
+    <hr>
+    <div id="demo1">{{ fullName }}</div>
+
+
+    <script>
+        var vm1 = new Vue({
+            el:'#example',
+            data:{
+                message:'Hello',
+                text:"wang",
+                gender:['man','woman'],
+                name:{
+                    leader:"wangdejun",
+                    member:['lidejun', 'zhangdejun', 'liudejun']
+                }
+            }
+        })
+
+        var vm2 = new Vue({
+            el:'#demo',
+            data:{
+                firstName:'Foo',
+                lastName:'Bar'
+            },
+            computed:{
+                fullName:function(){
+                    return this.firstName + ' ' + this.lastName;
+                }
+            }
+        })
+
+        var vm3 = new Vue({
+            el:'#demo1',
+            data:{
+                firstName:'Foo',
+                lastName:'Bar'
+            },
+            computed:{
+                fullName:{
+                    get:function(){
+                        return this.firstName + ' ' + this.lastName
+                    },
+                    set:function(newValue){
+                        var names = newValue.split(' ')
+                        this.firstName = names[0]
+                        this.lastName = names[names.length - 1];
+                    }
+                }
+            }
+
+        })
+        
+
+    </script>    
+</body>
+</html>
