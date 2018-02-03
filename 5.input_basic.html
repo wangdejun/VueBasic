@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>4.VueBasic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style> 
+        #button-block{
+            width:100px;
+            height:50px;
+            background-color: rosybrown;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>input 元素：</p>
+        <input v-model="message" placeholder="编辑我……">
+        <p>消息是: {{ message }}</p>
+          
+        <p>textarea 元素：</p>
+        <p style="white-space: pre">{{ message2 }}</p>
+        <textarea v-model="message2" placeholder="多行文本输入……"></textarea>
+    </div>
+
+    <!-- 因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 -->
+    <!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            message: 'Runoob',
+            message2: '菜鸟教程\r\nhttp://www.runoob.com'
+          }
+        })
+    </script>
+
+</body>
+</html>
+
+
+
+
+   
