@@ -23,7 +23,7 @@
             list-style: none;
             border:1px solid #eee;
             box-shadow: 3px 3px 5px #aaa;
-            background-color: orangered;
+            background-color:olivedrab;
             padding:5px 10px;
             margin:5px;
             color:#fff;
@@ -37,17 +37,21 @@
 </head>
 
 <body>
-    <div id="price"> 
-        <ul> 
-            <span>PS4's price in China</span>
+    <div id="price">
+        <ul>
+            <span><strong>今年3月3日发布的任天堂新一代主机的价格是：</strong></span>
             <li>
-                价格: {{price}}
+                价格: {{price}}日元
             </li>
             <li>
-                含税价格：{{priceInTax}}
+                含税价格：{{priceInTax}}日元，
+                <br>
+                <small>其中税后/税前比率：{{taxRate}}</small>
             </li>
             <li>
-                含税价格(RMB)： {{priceChinaRMB}}
+                含税价格(RMB)： {{priceChinaRMB}}元，
+                <br>
+                <small>其中默认汇率：{{exchangeRate}}<small>
             </li>
         </ul>
     </div>
@@ -61,14 +65,16 @@
         new Vue({
           el: '#price',
           data: {
-            price: 12000,
+            price: 299980,
+            exchangeRate:16.75,
+            taxRate:1.08
           },
           computed:{
             priceInTax:function(price){
-                return this.price * 1.08;
+                return this.price * this.taxRate;
             },
             priceChinaRMB:function(price){
-                return Math.round(this.priceInTax/16.75);
+                return Math.round(this.priceInTax/this.exchangeRate);
             }
           }
         })
