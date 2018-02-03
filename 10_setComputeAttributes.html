@@ -58,6 +58,9 @@
                 <small>其中默认汇率：{{exchangeRate}}<small>
             </li>
         </ul>
+        <button @click = "addPrice(1000)">
+                直接修改税后价格{{increment}}
+        </button>
         <button @click = "addPriceInTax(1000)">
             直接修改税后价格{{increment}}
         </button>
@@ -85,7 +88,7 @@
                         return this.price * 1.08;
                     },
                     set:function(value){
-                        this.price = value / 1.08;
+                        this.price = Math.round(value / 1.08);
                     }
                 },
                 priceChinaRMB:function(){
@@ -94,8 +97,11 @@
             },
 
             methods:{
-                addPriceInTax:function(newPrice){
-                    this.priceInTax = newPrice;
+                addPrice:function(increment){
+                    this.price = this.price + increment;
+                },
+                addPriceInTax:function(increment){
+                    this.priceInTax = Math.round(this.priceInTax + increment);
                 }
             }
         });
