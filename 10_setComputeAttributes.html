@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>4.VueBasic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        /*
+        reset.css
+        */
+        html, body{
+            padding:0px;
+            margin:0px;
+        }
+        ul{
+            margin:10px;
+            padding:0px;
+        }
+        /*Normal CSS*/
+        #price > ul >li{
+            list-style: none;
+            border:1px solid #eee;
+            box-shadow: 3px 3px 5px #aaa;
+            background-color:olivedrab;
+            padding:5px 10px;
+            margin:5px;
+            color:#fff;
+        }
+        #price > ul > span{
+            display: inline-block;
+            width:100%;
+            text-align: center;
+        }
+        #price > button{
+            display: inline-block;
+            width:100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="price">
+        <ul>
+            <span><strong>今年3月3日发布的任天堂新一代主机的价格是：</strong></span>
+            <li>
+                价格: {{price}}日元
+            </li>
+            <li>
+                含税价格：{{priceInTax}}日元，
+                <br>
+                <small>其中税后/税前比率：{{taxRate}}</small>
+            </li>
+            <li>
+                含税价格(RMB)： {{priceChinaRMB}}元，
+                <br>
+                <small>其中默认汇率：{{exchangeRate}}<small>
+            </li>
+        </ul>
+        <button @click = "addPriceInTax(1000)">
+            直接修改税后价格{{increment}}
+        </button>
+    </div>
+
+    <!-- 因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 -->
+    <!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+    <script>
+        //initialize the instance
+        var myApp = new Vue({
+            el: '#price',
+            data: {
+                price: 29980,
+                taxRate:1.08,
+                exchangeRate:16,
+                increment:1000
+            },
+
+            computed:{
+                priceInTax:{
+                    get:function(){
+                        return this.price * 1.08;
+                    },
+                    set:function(value){
+                        this.price = value / 1.08;
+                    }
+                },
+                priceChinaRMB:function(){
+                    return Math.round(this.priceInTax / this.exchangeRate);
+                },
+            },
+
+            methods:{
+                addPriceInTax:function(newPrice){
+                    this.priceInTax = newPrice;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
