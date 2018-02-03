@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>4.VueBasic</title>
+    <title>9.VueBasicExercise: watch the data change</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <style>
@@ -63,8 +63,6 @@
         </button>
     </div>
 
-    <!-- 因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 -->
-    <!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 -->
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 
@@ -80,19 +78,12 @@
                 taxRate:1.08,
                 increment:1000,
             },
+            //监测变量price,
             watch:{
                 price:function(oldValue, newValue){
                     console.log(oldValue,newValue);
                     this.priceInTax = this.price * this.taxRate;
                     this.priceChinaRMB = Math.round(this.priceInTax/this.exchangeRate);
-                }
-            },
-            computed:{
-                priceInTax:function(price){
-                    return this.price * this.taxRate;
-                },
-                priceChinaRMB:function(price){
-                    return Math.round(this.priceInTax/this.exchangeRate);
                 }
             },
             methods:{
@@ -106,6 +97,3 @@
     </script>
 </body>
 </html>
-
-
-
